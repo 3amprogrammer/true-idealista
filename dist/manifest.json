@@ -1,0 +1,40 @@
+{
+  "name": "True Idealista",
+  "description": "Makes searching for an ideal apartment easier with new filters and more.",
+  "version": "1.1.0",
+  "manifest_version": 3,
+  "icons": {
+    "16": "/images/true_idealista16.png",
+    "32": "/images/true_idealista32.png",
+    "48": "/images/true_idealista48.png",
+    "128": "/images/true_idealista128.png"
+  },
+  "permissions": [
+    "storage"
+  ],
+  "background": {
+    "service_worker": "true-idealista-background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.idealista.com/alquiler-viviendas/*",
+        "https://www.idealista.com/*/alquiler-viviendas/*"
+      ],
+      "js": [
+        "true-idealista-content.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "true-idealista-web.js",
+        "true-idealista-style.css"
+      ],
+      "matches": [
+        "https://www.idealista.com/*"
+      ]
+    }
+  ]
+}
