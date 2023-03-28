@@ -78,6 +78,6 @@ export default class Extension {
       return;
     }
 
-    return nextButton.getAttribute('href');
+    return location.origin + nextButton.getAttribute('href');
   }
 }

@@ -1,10 +1,10 @@
 <template>
   <div class="item-form">
-    <span class="title-label">Tipo de alquiler</span>
+    <span class="title-label">{{ $t('rentalPeriod.label') }}</span>
     <ul>
       <li>
         <RadioField
-            label="Indiferente"
+            :label="$t('rentalPeriod.all')"
             :value="RentalPeriod.All"
             :modelValue="modelValue"
             @change="newValue => $emit('update:modelValue', newValue)"
@@ -12,7 +12,7 @@
       </li>
       <li>
         <RadioField
-            label="Temporada"
+            :label="$t('rentalPeriod.shortTerm')"
             :value="RentalPeriod.ShortTerm"
             :modelValue="modelValue"
             @change="newValue => $emit('update:modelValue', newValue)"
@@ -20,7 +20,7 @@
       </li>
       <li>
         <RadioField
-            label="Larga estancia"
+            :label="$t('rentalPeriod.longTerm')"
             :value="RentalPeriod.LongTerm"
             :modelValue="modelValue"
             @change="newValue => $emit('update:modelValue', newValue)"

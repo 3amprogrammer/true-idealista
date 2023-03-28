@@ -31,5 +31,5 @@ injectScript(chrome.runtime.getURL('true-idealista-web.js'));
 windowMessageBus.subscribe(WindowMessageType.AppMounted, () => {
   const extension = new Extension(windowMessageBus, runtimeMessageBus, storage);
 
-  extension.run();
+  void extension.run();
 });

@@ -2,7 +2,6 @@ import Logger from '@/common/Logger';
 
 export enum MessageType {
   PagePreload = 'page.preload',
-  UserPaid = 'user.paid',
 }
 
 type Handler = (payload?: any) => void;

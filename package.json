@@ -17,7 +17,8 @@
     "extpay": "^3.0.4",
     "node-html-parser": "^6.0.0",
     "vue": "^3.2.38",
-    "vue-final-modal": "^3.4.4"
+    "vue-final-modal": "^3.4.4",
+    "vue-i18n": "^9.2.2"
   },
   "devDependencies": {
     "@types/chrome": "^0.0.196",

@@ -7,7 +7,8 @@ declare global {
     mapMode: number
     listingSearchUrl: string
     locationUri: string,
-    searchWithoutFilters: string
+    searchWithoutFilters: string,
+    locale: string
   };
 
   type IdealistaListing = {

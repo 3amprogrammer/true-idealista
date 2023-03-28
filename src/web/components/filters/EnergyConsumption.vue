@@ -1,6 +1,6 @@
 <template>
   <div class="item-form">
-    <span class="title-label">Certificado energético</span>
+    <span class="title-label">{{ $t('energyConsumption.label') }}</span>
 
     <ul class="energy-consumption">
       <li v-for="value in values">

@@ -2,9 +2,20 @@ import type { Ad, Details, IdealistaApiInterface } from '@/common/IdealistaApiIn
 import { type HTMLElement, parse } from 'node-html-parser';
 import type { EnergyConsumption } from '@/common/IdealistaApiInterface';
 
+type IdealistaApiConfig = {
+  adPath: string,
+  domain: string
+}
+
 export default class IdealistaApi implements IdealistaApiInterface {
+  private readonly config: IdealistaApiConfig;
+
+  constructor(config: IdealistaApiConfig) {
+    this.config = config;
+  }
+
   async fetchAd(id: string): Promise<Ad> {
-    return this.fetch(`/inmueble/${id}/`)
+    return this.fetch(`/${this.config.adPath}/${id}/`)
       .then(response => response.text())
       .then(pageHtml => {
         const dom = parse(pageHtml);
@@ -29,8 +40,7 @@ export default class IdealistaApi implements IdealistaApiInterface {
   private extractEnergyConsumption(dom: HTMLElement): EnergyConsumption | null {
     const node = [...dom.querySelectorAll('[class^="icon-energy"]')]
       .map(a => a.parentNode)
-      // TODO: Account for different language
-      .find(p => p.innerText.match('Consumo'));
+      .find(p => p.innerText.match('Consumo|Classe|Energy'));
 
     if (!node) {
       return null;
@@ -48,7 +58,7 @@ export default class IdealistaApi implements IdealistaApiInterface {
   }
 
   async fetchDetails(id: string): Promise<Details> {
-    return this.fetch(`/es/ajax/listingController/adContactInfoForDetail.ajax?adId=${id}`)
+    return this.fetch(`/en/ajax/listingController/adContactInfoForDetail.ajax?adId=${id}`)
       .then(response => response.json())
       .then(({ data }: { data: Details }) => {
         return data;
@@ -56,7 +66,10 @@ export default class IdealistaApi implements IdealistaApiInterface {
   }
 
   async fetch(urlPart: string) {
-    const url = `https://www.idealista.com${urlPart}`;
+    let url = urlPart;
+    if (!this.isAbsoluteUrl(urlPart)) {
+      url = `${this.config.domain}${urlPart}`;
+    }
 
     return fetch(url).catch(this.retry(url));
   }
@@ -65,5 +78,15 @@ export default class IdealistaApi implements IdealistaApiInterface {
     return () => new Promise<Response>((res) => {
       setTimeout(() => fetch(url).then(res), timeout);
     });
+  }
+
+  private isAbsoluteUrl(url: string) {
+    try {
+      new URL(url);
+    } catch (e) {
+      return false;
+    }
+
+    return true;
   }
 }

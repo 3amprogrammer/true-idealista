@@ -1,10 +1,10 @@
 <template>
   <div class="item-form">
-    <span class="title-label">Tipo de anuncio</span>
+    <span class="title-label">{{ $t('adType.label') }}</span>
     <ul>
       <li>
         <RadioField
-            label="Indiferente"
+            :label="$t('adType.all')"
             :value="AdType.All"
             :modelValue="modelValue"
             @change="newValue => $emit('update:modelValue', newValue)"
@@ -12,7 +12,7 @@
       </li>
       <li>
         <RadioField
-            label="Con propietario"
+            :label="$t('adType.private')"
             :value="AdType.Private"
             :modelValue="modelValue"
             @change="newValue => $emit('update:modelValue', newValue)"
@@ -20,7 +20,7 @@
       </li>
       <li>
         <RadioField
-            label="Con agencia"
+            :label="$t('adType.agency')"
             :value="AdType.Agency"
             :modelValue="modelValue"
             @change="newValue => $emit('update:modelValue', newValue)"

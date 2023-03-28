@@ -1,8 +1,8 @@
 <template>
   <div class="item-form">
-    <span class="title-label">Descripción</span>
+    <span class="title-label">{{ $t('description.label')}}</span>
     <TagField
-        placeholder="Buscar en la descripción"
+        :placeholder="$t('description.placeholder')"
         :modelValue="phrases"
         @change="newPhrases => $emit('update:phrases', newPhrases)"
     />
@@ -10,7 +10,7 @@
     <ul class="search-type">
       <li>
         <RadioField
-            label="Destacar resultados"
+            :label="$t('description.result.highlight')"
             :value="SearchType.Highlight"
             :modelValue="type"
             @change="newValue => $emit('update:type', newValue)"
@@ -19,7 +19,7 @@
 
       <li>
         <RadioField
-            label="Mostrar sólo coincidentes"
+            :label="$t('description.result.strict')"
             :value="SearchType.Strict"
             :modelValue="type"
             @change="newValue => $emit('update:type', newValue)"

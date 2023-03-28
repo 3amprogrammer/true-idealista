@@ -65,8 +65,17 @@ export default class Item {
   }
 
   async isShortTerm() {
-    // TODO: Account for different language
-    const temporalIndicators = ['tempora', 'seasonal', '11 (months|meses)', '3[0-2].*?11'];
+    const temporalIndicators = [
+      '\btempora',
+      '\bseasonal',
+      'rendas mensais',
+      'affitto breve',
+      'brevi periodi',
+      'short-term',
+      'short period',
+      'short',
+      '11 (months|meses)'
+    ];
 
     const temporalIndicatorsPattern = temporalIndicators.join('|');
 
