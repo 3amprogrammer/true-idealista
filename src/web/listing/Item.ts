@@ -11,7 +11,7 @@ export default class Item {
   }
 
   id() {
-    return this.element.dataset.adid!;
+    return this.element.dataset.elementId!;
   }
 
   shortDescription() {
